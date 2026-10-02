@@ -30,25 +30,206 @@ footer{max-width:1220px;margin:50px auto 0;padding:30px 20px 45px;color:#707582;
 </div></main>
 <footer>ShowTime © 2026 · Movie discovery only · Use official streaming, rental and purchase services.</footer>
 <div id="modal" class="modal"><div class="dialog"><button class="close" onclick="closeModal()" aria-label="Close">×</button><div id="detail"></div></div></div>
+<section class="section" id="movieDataHelp" style="max-width:1220px;margin-left:auto;margin-right:auto;padding:0 20px 20px"><div class="feature" style="min-height:auto"><div class="eyebrow">EASY MOVIE ENTRY</div><h3>Add movies without editing JavaScript.</h3><p class="muted">In this file, find <b>const movieData = `</b> and paste another movie block after the last one. Keep one blank line between movie blocks.</p><pre style="white-space:pre-wrap;background:#0b0d12;border:1px solid #292c38;border-radius:12px;padding:14px;color:#dfe2ea;overflow:auto">Title: My Movie
+Year: 2026
+Rating: 8.5
+Genre: Action
+Director: Director Name
+Description: Short description.
+Poster: https://...
+Play: https://...
+Download: https://...</pre><small style="color:#8f94a2">Use only authorized Play/Download links for content you have permission to share.</small></div></section>
 <script>
-const movies=[
-{t:"Inception",y:2010,g:"Sci-Fi",r:8.8,e:"🌀",c:"Christopher Nolan",d:"A mind-bending thriller about dreams, memory and a high-stakes mission.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#46224d,#151727)"},
-{t:"Interstellar",y:2014,g:"Sci-Fi",r:8.7,e:"🚀",c:"Christopher Nolan",d:"A team travels beyond Earth in search of a future for humanity.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#132e51,#111522)"},
-{t:"The Dark Knight",y:2008,g:"Action",r:9.0,e:"🦇",c:"Christopher Nolan",d:"A superhero crime drama centered on Batman and Gotham's escalating conflict.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#252a38,#0e1016)"},
-{t:"The Martian",y:2015,g:"Adventure",r:8.0,e:"🪐",c:"Ridley Scott",d:"An astronaut must survive on Mars while his team works to bring him home.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#71351e,#17131a)"},
-{t:"Spider-Man",y:2002,g:"Action",r:7.4,e:"🕷️",c:"Sam Raimi",d:"A young hero discovers his powers and faces a dangerous new enemy.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#4a1824,#161b32)"},
-{t:"The Prestige",y:2006,g:"Drama",r:8.5,e:"🎩",c:"Christopher Nolan",d:"Two rival illusionists become consumed by competition and secrets.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#45331b,#15151c)"},
-{t:"Avatar",y:2009,g:"Fantasy",r:7.8,e:"🌌",c:"James Cameron",d:"A marine becomes involved in the struggle surrounding an alien world.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#123e4c,#17172d)"},
-{t:"Toy Story",y:1995,g:"Animation",r:8.3,e:"🧸",c:"John Lasseter",d:"A classic animated adventure about toys, friendship and growing up.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#254b66,#2b1d39)"},
-{t:"Parasite",y:2019,g:"Thriller",r:8.5,e:"🏠",c:"Bong Joon Ho",d:"A darkly comic thriller about two families whose lives become intertwined.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#273f32,#11161b)"},
-{t:"Whiplash",y:2014,g:"Drama",r:8.5,e:"🥁",c:"Damien Chazelle",d:"A young drummer enters an intense relationship with an uncompromising instructor.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#432b22,#12131a)"},
-{t:"The Matrix",y:1999,g:"Sci-Fi",r:8.7,e:"💊",c:"The Wachowskis",d:"A hacker discovers a hidden reality and joins a fight for freedom.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#123e31,#10181a)"},
-{t:"Spirited Away",y:2001,g:"Animation",r:8.6,e:"🐉",c:"Hayao Miyazaki",d:"A young girl enters a mysterious spirit world and searches for a way home.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#2e4d5c,#2c1d44)"},
-{t:"Gladiator",y:2000,g:"Action",r:8.5,e:"⚔️",c:"Ridley Scott",d:"A Roman general is forced into the arena and seeks justice for his family.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#5a321d,#1b1715)"},
-{t:"Coco",y:2017,g:"Animation",r:8.4,e:"🎸",c:"Lee Unkrich",d:"A young musician journeys into the Land of the Dead to uncover his family history.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#6b2729,#231a3d)"},
-{t:"Knives Out",y:2019,g:"Mystery",r:7.9,e:"🔍",c:"Rian Johnson",d:"A detective investigates a wealthy family's mysterious gathering and hidden secrets.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#403d25,#15171a)"},
-{t:"The Grand Budapest Hotel",y:2014,g:"Comedy",r:8.1,e:"🏨",c:"Wes Anderson",d:"A concierge and his lobby boy become caught in a caper surrounding a priceless painting.",poster:"",play:"",download:"",p:"linear-gradient(145deg,#6d2d45,#2b2031)"}
-];
+const movieData = `
+Title: Inception
+Year: 2010
+Rating: 8.8
+Genre: Sci-Fi
+Director: Christopher Nolan
+Description: A mind-bending thriller about dreams, memory and a high-stakes mission.
+Poster: 
+Play: 
+Download: 
+
+Title: Interstellar
+Year: 2014
+Rating: 8.7
+Genre: Sci-Fi
+Director: Christopher Nolan
+Description: A team travels beyond Earth in search of a future for humanity.
+Poster: 
+Play: 
+Download: 
+
+Title: The Dark Knight
+Year: 2008
+Rating: 9.0
+Genre: Action
+Director: Christopher Nolan
+Description: A superhero crime drama centered on Batman and Gotham's escalating conflict.
+Poster: 
+Play: 
+Download: 
+
+Title: The Martian
+Year: 2015
+Rating: 8.0
+Genre: Adventure
+Director: Ridley Scott
+Description: An astronaut must survive on Mars while his team works to bring him home.
+Poster: 
+Play: 
+Download: 
+
+Title: Spider-Man
+Year: 2002
+Rating: 7.4
+Genre: Action
+Director: Sam Raimi
+Description: A young hero discovers his powers and faces a dangerous new enemy.
+Poster: 
+Play: 
+Download: 
+
+Title: The Prestige
+Year: 2006
+Rating: 8.5
+Genre: Drama
+Director: Christopher Nolan
+Description: Two rival illusionists become consumed by competition and secrets.
+Poster: 
+Play: 
+Download: 
+
+Title: Avatar
+Year: 2009
+Rating: 7.8
+Genre: Fantasy
+Director: James Cameron
+Description: A marine becomes involved in the struggle surrounding an alien world.
+Poster: 
+Play: 
+Download: 
+
+Title: Toy Story
+Year: 1995
+Rating: 8.3
+Genre: Animation
+Director: John Lasseter
+Description: A classic animated adventure about toys, friendship and growing up.
+Poster: 
+Play: 
+Download: 
+
+Title: Parasite
+Year: 2019
+Rating: 8.5
+Genre: Thriller
+Director: Bong Joon Ho
+Description: A darkly comic thriller about two families whose lives become intertwined.
+Poster: 
+Play: 
+Download: 
+
+Title: Whiplash
+Year: 2014
+Rating: 8.5
+Genre: Drama
+Director: Damien Chazelle
+Description: A young drummer enters an intense relationship with an uncompromising instructor.
+Poster: 
+Play: 
+Download: 
+
+Title: The Matrix
+Year: 1999
+Rating: 8.7
+Genre: Sci-Fi
+Director: The Wachowskis
+Description: A hacker discovers a hidden reality and joins a fight for freedom.
+Poster: 
+Play: 
+Download: 
+
+Title: Spirited Away
+Year: 2001
+Rating: 8.6
+Genre: Animation
+Director: Hayao Miyazaki
+Description: A young girl enters a mysterious spirit world and searches for a way home.
+Poster: 
+Play: 
+Download: 
+
+Title: Gladiator
+Year: 2000
+Rating: 8.5
+Genre: Action
+Director: Ridley Scott
+Description: A Roman general is forced into the arena and seeks justice for his family.
+Poster: 
+Play: 
+Download: 
+
+Title: Coco
+Year: 2017
+Rating: 8.4
+Genre: Animation
+Director: Lee Unkrich
+Description: A young musician journeys into the Land of the Dead to uncover his family history.
+Poster: 
+Play: 
+Download: 
+
+Title: Knives Out
+Year: 2019
+Rating: 7.9
+Genre: Mystery
+Director: Rian Johnson
+Description: A detective investigates a wealthy family's mysterious gathering and hidden secrets.
+Poster: 
+Play: 
+Download: 
+
+Title: The Grand Budapest Hotel
+Year: 2014
+Rating: 8.1
+Genre: Comedy
+Director: Wes Anderson
+Description: A concierge and his lobby boy become caught in a caper surrounding a priceless painting.
+Poster: 
+Play: 
+Download: 
+`;
+
+function parseMovieData(text){
+  const blocks = text.trim().split(/\n\s*\n/).filter(Boolean);
+  const out = [];
+  for(const block of blocks){
+    const get = key => {
+      const m = block.match(new RegExp("^"+key+"\\s*:\\s*(.*)$","mi"));
+      return m ? m[1].trim() : "";
+    };
+    const title = get("Title");
+    if(!title) continue;
+    out.push({
+      t:title,
+      y:Number(get("Year")) || new Date().getFullYear(),
+      g:get("Genre") || "Other",
+      r:Number(get("Rating")) || 0,
+      e:"🎬",
+      c:get("Director") || "Unknown",
+      d:get("Description") || "Discover this movie on ShowTime.",
+      poster:get("Poster"),
+      play:get("Play"),
+      download:get("Download"),
+      p:"linear-gradient(145deg,#33204a,#151727)"
+    });
+  }
+  return out;
+}
+
+const movies=parseMovieData(movieData);
 let genre="All";const grid=document.getElementById('grid'),trend=document.getElementById('trendingGrid'),search=document.getElementById('search'),chips=document.getElementById('chips');
 const genres=["All",...new Set(movies.map(m=>m.g))];
 genres.forEach(g=>{const b=document.createElement('button');b.className='chip'+(g==='All'?' active':'');b.textContent=g;b.onclick=()=>{genre=g;document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()};chips.appendChild(b)});
