@@ -1,243 +1,542 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ShowTime — Discover Movies</title>
-<meta name="description" content="ShowTime is a modern movie discovery website for finding films, genres, ratings and official trailers.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ShowTime — Movies</title>
+
 <style>
-:root{--bg:#07080c;--panel:#11131a;--panel2:#171923;--text:#f6f7fb;--muted:#9da2b1;--line:#282b38;--accent:#ff315d;--accent2:#8b5cf6;--good:#68e0a0}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 15% 0%,#171026 0,transparent 30%),radial-gradient(circle at 90% 15%,#25101b 0,transparent 28%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{text-decoration:none;color:inherit}button,input{font:inherit}
-header{position:sticky;top:0;z-index:50;background:rgba(7,8,12,.78);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}nav{max-width:1220px;margin:auto;padding:15px 22px;display:flex;align-items:center;gap:28px}.logo{font-size:27px;font-weight:950;letter-spacing:-1.2px}.logo b{color:var(--accent)}.links{display:flex;gap:20px;color:#aeb2be;font-size:14px}.links a:hover{color:#fff}.search{margin-left:auto;width:min(390px,42vw);border:1px solid #303341;background:#14161e;color:#fff;border-radius:999px;padding:11px 16px;outline:0}.search:focus{border-color:var(--accent);box-shadow:0 0 0 4px #ff315d18}
-.hero{max-width:1220px;margin:24px auto 0;padding:64px 54px;min-height:425px;border:1px solid #292b37;border-radius:30px;overflow:hidden;position:relative;background:linear-gradient(110deg,#11131b 15%,#10111a 48%,#1b1020 100%);box-shadow:0 30px 90px #0008}.hero:before{content:"";position:absolute;width:520px;height:520px;right:-130px;top:-180px;border-radius:50%;background:radial-gradient(circle,#ff315d55,transparent 65%);filter:blur(4px)}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,#ffffff03 50%,#ff315d09 100%);pointer-events:none}.heroContent{position:relative;z-index:2;max-width:650px}.eyebrow{font-size:12px;letter-spacing:2.2px;font-weight:900;color:#ff7c96}.hero h1{font-size:clamp(45px,7vw,78px);line-height:.94;letter-spacing:-4px;margin:15px 0}.hero h1 span{color:var(--accent)}.hero p{color:#b8bbc6;line-height:1.75;max-width:610px;font-size:16px}.actions{display:flex;gap:10px;margin-top:25px;flex-wrap:wrap}.btn,.ghost{padding:12px 18px;border-radius:12px;font-weight:800;cursor:pointer;display:inline-block}.btn{background:var(--accent);color:#fff;box-shadow:0 12px 32px #ff315d30}.ghost{background:#ffffff08;border:1px solid #363846;color:#eee}.heroPosters{position:absolute;right:45px;bottom:35px;width:350px;height:330px;transform:rotate(4deg)}.mini{position:absolute;width:150px;height:220px;border-radius:18px;border:1px solid #ffffff22;box-shadow:0 30px 60px #0009;display:grid;place-items:center;font-size:48px}.mini.one{right:10px;top:0;background:linear-gradient(145deg,#47204a,#171525)}.mini.two{left:30px;top:90px;background:linear-gradient(145deg,#162c50,#151621);transform:rotate(-13deg)}.mini.three{right:95px;bottom:-10px;width:105px;height:150px;font-size:34px;background:linear-gradient(145deg,#543318,#17151a);transform:rotate(8deg)}
-.wrap{max-width:1220px;margin:auto;padding:0 20px}.section{margin-top:46px}.sectionHead{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:18px}.section h2{font-size:24px;margin:0;letter-spacing:-.6px}.sectionHead small{color:#7f8491}.chips{display:flex;gap:9px;overflow:auto;padding:2px 1px 6px}.chip{border:1px solid #303340;background:#14161e;color:#d8dae2;padding:9px 14px;border-radius:999px;cursor:pointer;white-space:nowrap}.chip:hover{border-color:#55596a}.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
-.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:17px}.card{background:linear-gradient(180deg,#151720,#101118);border:1px solid #282b37;border-radius:17px;overflow:hidden;cursor:pointer;transition:.25s;position:relative}.card:hover{transform:translateY(-6px);border-color:#ff315d99;box-shadow:0 22px 45px #0008}.poster{height:255px;display:flex;align-items:flex-end;padding:13px;position:relative;overflow:hidden;background:var(--poster)}.poster.hasImage{background-size:cover;background-position:center}.poster.hasImage .posterIcon{display:none}.poster:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#ffffff08 0%,transparent 45%,#000b 100%)}.posterIcon{position:absolute;inset:0;display:grid;place-items:center;font-size:62px;filter:drop-shadow(0 12px 20px #0008)}.posterLabel{position:relative;z-index:2;font-weight:900;font-size:13px;letter-spacing:.8px;text-transform:uppercase}.score{position:absolute;z-index:3;right:10px;top:10px;background:#090a0dcc;border:1px solid #ffffff1c;padding:6px 8px;border-radius:9px;font-size:12px;font-weight:850}.info{padding:13px}.title{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{font-size:12px;color:#979ba8;margin-top:6px}.tag{display:inline-block;margin-top:10px;padding:5px 8px;background:#242733;border-radius:7px;color:#d8dae1;font-size:11px}
-.featured{display:grid;grid-template-columns:1.3fr .7fr;gap:18px}.feature{border:1px solid #292c39;border-radius:20px;padding:24px;min-height:230px;background:linear-gradient(135deg,#19121d,#10131b);position:relative;overflow:hidden}.feature h3{font-size:30px;margin:10px 0}.feature p{color:#aeb1bd;line-height:1.65;max-width:650px}.feature .orb{position:absolute;width:260px;height:260px;border-radius:50%;right:-90px;bottom:-120px;background:radial-gradient(circle,#8b5cf655,transparent 65%)}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.stat{background:#11131a;border:1px solid #292c38;border-radius:18px;padding:22px}.stat strong{font-size:28px}.stat span{display:block;color:#8f94a2;font-size:12px;margin-top:5px}
-.empty{text-align:center;color:#8f94a2;padding:45px;grid-column:1/-1;border:1px dashed #343744;border-radius:16px}.modal{position:fixed;inset:0;background:#000c;display:none;place-items:center;padding:18px;z-index:100}.modal.show{display:grid}.dialog{width:min(820px,100%);max-height:90vh;overflow:auto;background:#13151d;border:1px solid #303341;border-radius:22px;padding:25px;position:relative;box-shadow:0 40px 100px #000}.close{position:absolute;right:15px;top:14px;border:0;background:#292c38;color:#fff;border-radius:50%;width:37px;height:37px;font-size:20px;cursor:pointer}.detail{display:grid;grid-template-columns:230px 1fr;gap:24px;padding-top:10px}.detail .poster{height:330px;border-radius:15px}.detail h1{font-size:38px;margin:7px 0}.muted{color:#aeb2be;line-height:1.7}.detailLine{margin:8px 0;color:#d7d9e0}.official{margin-top:22px}.official small{display:block;color:#8f94a2;margin-bottom:9px}.official a{margin-right:8px;margin-bottom:8px}.movieActions{margin-top:18px;display:flex;gap:9px;flex-wrap:wrap}.movieActions a{margin:0}.videoBox{margin-top:20px}.videoBox video{width:100%;max-height:430px;border-radius:14px;background:#000}.entryHelp{margin:14px 0 0;padding:14px 16px;border:1px solid #292c38;border-radius:14px;background:#0f1118;color:#aeb2be;font-size:13px;line-height:1.6}
-footer{max-width:1220px;margin:50px auto 0;padding:30px 20px 45px;color:#707582;text-align:center;border-top:1px solid #1f222d;font-size:13px}
-@media(max-width:980px){.grid{grid-template-columns:repeat(3,1fr)}.heroPosters{opacity:.45;right:-40px}.featured{grid-template-columns:1fr}}
-@media(max-width:650px){nav{padding:13px 14px}.links{display:none}.search{width:58vw}.hero{margin:14px 12px 0;padding:35px 24px;min-height:350px}.hero h1{font-size:47px}.heroPosters{display:none}.wrap{padding:0 14px}.grid{grid-template-columns:repeat(2,1fr);gap:12px}.poster{height:220px}.detail{grid-template-columns:1fr}.detail .poster{height:280px}.detail h1{font-size:31px}.stats{grid-template-columns:1fr 1fr}}
-</style>
-</head>
-<body>
-<header><nav><a class="logo" href="#top">Show<b>Time</b></a><div class="links"><a href="#discover">Discover</a><a href="#trending">Trending</a><a href="#movies">Movies</a><a href="#genres">Genres</a></div><input id="search" class="search" placeholder="⌕  Search movies..." aria-label="Search movies"></nav></header>
-<main id="top">
-<section class="hero"><div class="heroContent"><div class="eyebrow">SHOWTIME • MOVIE DISCOVERY</div><h1>Find your next<br><span>great watch.</span></h1><p>Explore popular films, browse genres, check ratings and jump to official trailers. Built for fast, simple movie discovery.</p><div class="actions"><a class="btn" href="#movies">Explore Movies</a><a class="ghost" href="#genres">Browse Genres</a></div></div><div class="heroPosters"><div class="mini one">🎬</div><div class="mini two">🚀</div><div class="mini three">⭐</div></div></section>
-<div class="wrap">
-<section class="section" id="discover"><div class="sectionHead"><h2>Browse by genre</h2><small>Tap a genre to filter</small></div><div id="chips" class="chips"></div></section>
-<section class="section" id="trending"><div class="sectionHead"><h2>Trending now</h2><small>Popular picks</small></div><div id="trendingGrid" class="grid"></div></section>
-<section class="section" id="movies"><div class="sectionHead"><h2 id="heading">All movies</h2><small id="count"></small></div><div id="grid" class="grid"></div></section>
-<section class="section" id="genres"><div class="featured"><div class="feature"><div class="eyebrow">SHOWTIME FEATURE</div><h3>One place to discover movies.</h3><p>Search by title, filter by genre, explore ratings and open a movie card for more information. Trailer buttons lead to official YouTube search results.</p><a class="btn" href="#movies">Start exploring</a><div class="entryHelp"><b>Easy movie entry:</b> edit the <code>movies</code> array in this file. Each movie can have a <code>poster</code>, <code>play</code>, and <code>download</code> URL. Add another movie object for each authorized movie.</div><div class="orb"></div></div><div class="stats"><div class="stat"><strong id="movieCount">0</strong><span>movies in catalogue</span></div><div class="stat"><strong id="genreCount">0</strong><span>genres</span></div><div class="stat"><strong>24/7</strong><span>discover anytime</span></div><div class="stat"><strong>100%</strong><span>discovery focused</span></div></div></div></section>
-</div></main>
-<footer>ShowTime © 2026 · Movie discovery only · Use official streaming, rental and purchase services.</footer>
-<div id="modal" class="modal"><div class="dialog"><button class="close" onclick="closeModal()" aria-label="Close">×</button><div id="detail"></div></div></div>
-<section class="section" id="movieDataHelp" style="max-width:1220px;margin-left:auto;margin-right:auto;padding:0 20px 20px"><div class="feature" style="min-height:auto"><div class="eyebrow">EASY MOVIE ENTRY</div><h3>Add movies without editing JavaScript.</h3><p class="muted">In this file, find <b>const movieData = `</b> and paste another movie block after the last one. Keep one blank line between movie blocks.</p><pre style="white-space:pre-wrap;background:#0b0d12;border:1px solid #292c38;border-radius:12px;padding:14px;color:#dfe2ea;overflow:auto">Title: My Movie
-Year: 2026
-Rating: 8.5
-Genre: Action
-Director: Director Name
-Description: Short description.
-Poster: https://...
-Play: https://...
-Download: https://...</pre><small style="color:#8f94a2">Use only authorized Play/Download links for content you have permission to share.</small></div></section>
-<script>
-const movieData = `
-Title: The vvaan
-Year: 2026
-Rating: 8.5
-Genre: Action, adventure 
-Director: Deepak Kumar Mishra, Arunabh Kumar
-Description: A rational urban man defies his ancestral forbidden forest and awakens a divine goddess, only to realise that not only do some powers exist beyond logic but he must rise as the village's only saviour to protect his people from annihilation
-Poster: https://i.ibb.co/H6QNCVh/et00444235-tdfpdyspsb-landscape.jpg
-Play: https://streamrip.fun/movie/1384514
-Download: https://rozgarlelo.modiplay.xyz/download/the-vvaan
-
-Title: Interstellar
-Year: 2014
-Rating: 8.7
-Genre: Sci-Fi
-Director: Christopher Nolan
-Description: A team travels beyond Earth in search of a future for humanity.
-Poster: 
-Play: 
-Download: 
-
-Title: The Dark Knight
-Year: 2008
-Rating: 9.0
-Genre: Action
-Director: Christopher Nolan
-Description: A superhero crime drama centered on Batman and Gotham's escalating conflict.
-Poster: 
-Play: 
-Download: 
-
-Title: The Martian
-Year: 2015
-Rating: 8.0
-Genre: Adventure
-Director: Ridley Scott
-Description: An astronaut must survive on Mars while his team works to bring him home.
-Poster: 
-Play: 
-Download: 
-
-Title: Spider-Man
-Year: 2002
-Rating: 7.4
-Genre: Action
-Director: Sam Raimi
-Description: A young hero discovers his powers and faces a dangerous new enemy.
-Poster: 
-Play: 
-Download: 
-
-Title: The Prestige
-Year: 2006
-Rating: 8.5
-Genre: Drama
-Director: Christopher Nolan
-Description: Two rival illusionists become consumed by competition and secrets.
-Poster: 
-Play: 
-Download: 
-
-Title: Avatar
-Year: 2009
-Rating: 7.8
-Genre: Fantasy
-Director: James Cameron
-Description: A marine becomes involved in the struggle surrounding an alien world.
-Poster: 
-Play: 
-Download: 
-
-Title: Toy Story
-Year: 1995
-Rating: 8.3
-Genre: Animation
-Director: John Lasseter
-Description: A classic animated adventure about toys, friendship and growing up.
-Poster: 
-Play: 
-Download: 
-
-Title: Parasite
-Year: 2019
-Rating: 8.5
-Genre: Thriller
-Director: Bong Joon Ho
-Description: A darkly comic thriller about two families whose lives become intertwined.
-Poster: 
-Play: 
-Download: 
-
-Title: Whiplash
-Year: 2014
-Rating: 8.5
-Genre: Drama
-Director: Damien Chazelle
-Description: A young drummer enters an intense relationship with an uncompromising instructor.
-Poster: 
-Play: 
-Download: 
-
-Title: The Matrix
-Year: 1999
-Rating: 8.7
-Genre: Sci-Fi
-Director: The Wachowskis
-Description: A hacker discovers a hidden reality and joins a fight for freedom.
-Poster: 
-Play: 
-Download: 
-
-Title: Spirited Away
-Year: 2001
-Rating: 8.6
-Genre: Animation
-Director: Hayao Miyazaki
-Description: A young girl enters a mysterious spirit world and searches for a way home.
-Poster: 
-Play: 
-Download: 
-
-Title: Gladiator
-Year: 2000
-Rating: 8.5
-Genre: Action
-Director: Ridley Scott
-Description: A Roman general is forced into the arena and seeks justice for his family.
-Poster: 
-Play: 
-Download: 
-
-Title: Coco
-Year: 2017
-Rating: 8.4
-Genre: Animation
-Director: Lee Unkrich
-Description: A young musician journeys into the Land of the Dead to uncover his family history.
-Poster: 
-Play: 
-Download: 
-
-Title: Knives Out
-Year: 2019
-Rating: 7.9
-Genre: Mystery
-Director: Rian Johnson
-Description: A detective investigates a wealthy family's mysterious gathering and hidden secrets.
-Poster: 
-Play: 
-Download: 
-
-Title: The Grand Budapest Hotel
-Year: 2014
-Rating: 8.1
-Genre: Comedy
-Director: Wes Anderson
-Description: A concierge and his lobby boy become caught in a caper surrounding a priceless painting.
-Poster: 
-Play: 
-Download: 
-`;
-
-function parseMovieData(text){
-  const blocks = text.trim().split(/\n\s*\n/).filter(Boolean);
-  const out = [];
-  for(const block of blocks){
-    const get = key => {
-      const m = block.match(new RegExp("^"+key+"\\s*:\\s*(.*)$","mi"));
-      return m ? m[1].trim() : "";
-    };
-    const title = get("Title");
-    if(!title) continue;
-    out.push({
-      t:title,
-      y:Number(get("Year")) || new Date().getFullYear(),
-      g:get("Genre") || "Other",
-      r:Number(get("Rating")) || 0,
-      e:"🎬",
-      c:get("Director") || "Unknown",
-      d:get("Description") || "Discover this movie on ShowTime.",
-      poster:get("Poster"),
-      play:get("Play"),
-      download:get("Download"),
-      p:"linear-gradient(145deg,#33204a,#151727)"
-    });
-  }
-  return out;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#07080c;
+  color:#fff;
+  font-family:Arial,sans-serif
+}
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:#0d0f15;
+  border-bottom:1px solid #292c36
+}
+nav{
+  max-width:1200px;
+  margin:auto;
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  gap:20px
+}
+.logo{
+  font-size:26px;
+  font-weight:900
+}
+.logo b{color:#ff315d}
+.search{
+  margin-left:auto;
+  width:min(380px,55vw);
+  padding:11px 16px;
+  border-radius:25px;
+  border:1px solid #333744;
+  background:#171922;
+  color:white;
+  outline:none
+}
+main{
+  max-width:1200px;
+  margin:auto;
+  padding:25px 20px
+}
+.hero{
+  padding:55px 35px;
+  border-radius:25px;
+  background:linear-gradient(135deg,#17111f,#111722);
+  border:1px solid #292c38
+}
+.hero h1{
+  font-size:clamp(42px,7vw,75px);
+  margin:10px 0
+}
+.hero h1 span{color:#ff315d}
+.hero p{
+  color:#aaa;
+  max-width:650px;
+  line-height:1.7
+}
+.section{margin-top:45px}
+.sectionHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+.chips{
+  display:flex;
+  gap:9px;
+  overflow:auto;
+  margin-top:15px
+}
+.chip{
+  padding:9px 15px;
+  border-radius:20px;
+  border:1px solid #333744;
+  background:#151720;
+  color:#ddd;
+  cursor:pointer;
+  white-space:nowrap
+}
+.chip.active{
+  background:#ff315d;
+  border-color:#ff315d
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
+  margin-top:20px
+}
+.card{
+  background:#12141b;
+  border:1px solid #292c38;
+  border-radius:16px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.2s
+}
+.card:hover{
+  transform:translateY(-5px);
+  border-color:#ff315d
+}
+.poster{
+  height:260px;
+  background:#242733;
+  background-size:cover;
+  background-position:center;
+  position:relative
+}
+.poster:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(transparent 45%,#000c)
+}
+.score{
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:2;
+  background:#090a0dcc;
+  padding:6px 8px;
+  border-radius:8px
+}
+.posterLabel{
+  position:absolute;
+  bottom:12px;
+  left:12px;
+  z-index:2;
+  font-weight:bold
+}
+.info{padding:13px}
+.title{
+  font-weight:bold;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis
+}
+.meta{
+  color:#999;
+  font-size:12px;
+  margin-top:6px
+}
+.tag{
+  display:inline-block;
+  margin-top:9px;
+  padding:5px 8px;
+  background:#252833;
+  border-radius:7px;
+  font-size:11px
+}
+.empty{
+  grid-column:1/-1;
+  padding:50px;
+  text-align:center;
+  color:#888
+}
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:#000c;
+  place-items:center;
+  padding:20px
+}
+.modal.show{display:grid}
+.dialog{
+  width:min(750px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#14161e;
+  border:1px solid #333744;
+  border-radius:20px;
+  padding:25px;
+  position:relative
+}
+.close{
+  position:absolute;
+  right:15px;
+  top:15px;
+  border:0;
+  border-radius:50%;
+  width:35px;
+  height:35px;
+  background:#292c38;
+  color:white;
+  font-size:20px
+}
+.detail{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:22px
+}
+.detailPoster{
+  height:320px;
+  border-radius:14px;
+  background-size:cover;
+  background-position:center
+}
+.detail h2{font-size:32px}
+.muted{
+  color:#aaa;
+  line-height:1.7
 }
 
-const movies=parseMovieData(movieData);
-let genre="All";const grid=document.getElementById('grid'),trend=document.getElementById('trendingGrid'),search=document.getElementById('search'),chips=document.getElementById('chips');
-const genres=["All",...new Set(movies.map(m=>m.g))];
-genres.forEach(g=>{const b=document.createElement('button');b.className='chip'+(g==='All'?' active':'');b.textContent=g;b.onclick=()=>{genre=g;document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()};chips.appendChild(b)});
-function card(m){const cls=m.poster?"poster hasImage":"poster";const bg=m.poster?`background-image:url("${m.poster}")`:`--poster:${m.p}`;return `<article class="card" onclick="openModal(${movies.indexOf(m)})"><div class="${cls}" style="${bg}"><div class="posterIcon">${m.e}</div><span class="score">⭐ ${m.r}</span><span class="posterLabel">${m.g}</span></div><div class="info"><div class="title">${m.t}</div><div class="meta">${m.y} · ${m.c}</div><span class="tag">${m.g}</span></div></article>`}
-function render(){const q=search.value.trim().toLowerCase();const list=movies.filter(m=>(genre==='All'||m.g===genre)&&(m.t+' '+m.g+' '+m.c).toLowerCase().includes(q));grid.innerHTML=list.length?list.map(card).join(''):`<div class="empty">No movies found.<br><small>Try another title or genre.</small></div>`;document.getElementById('heading').textContent=genre==='All'?'All movies':genre+' movies';document.getElementById('count').textContent=list.length+' result'+(list.length===1?'':'s')}
-function renderTrending(){trend.innerHTML=movies.slice().sort((a,b)=>b.r-a.r).slice(0,5).map(card).join('')}
-search.addEventListener('input',render);
-function openModal(i){const m=movies[i];const trailer='https://www.youtube.com/results?search_query='+encodeURIComponent(m.t+' official trailer');const posterBox=m.poster?`<div class="poster hasImage" style="background-image:url("${m.poster}")"><div class="posterIcon">${m.e}</div><span class="score">⭐ ${m.r}</span><span class="posterLabel">${m.g}</span></div>`:`<div class="poster" style="--poster:${m.p}"><div class="posterIcon">${m.e}</div><span class="score">⭐ ${m.r}</span><span class="posterLabel">${m.g}</span></div>`;const play=m.play?`<a class="btn" href="${m.play}" target="_blank" rel="noopener">▶ Play</a>`:'';const download=m.download?`<a class="ghost" href="${m.download}" target="_blank" rel="noopener">⬇ Download</a>`:'';const inlineVideo=m.play&&/\.mp4(?:[?#].*)?$/i.test(m.play)?`<div class="videoBox"><video controls playsinline preload="metadata"><source src="${m.play}" type="video/mp4">Your browser cannot play this video.</video></div>`:'';document.getElementById('detail').innerHTML=`<div class="detail">${posterBox}<div><div class="eyebrow">${m.g.toUpperCase()} • ${m.y}</div><h1>${m.t}</h1><p class="muted">${m.d}</p><div class="detailLine"><b>Director:</b> ${m.c}</div><div class="detailLine"><b>Rating:</b> ⭐ ${m.r}/10</div><div class="movieActions">${play}${download}<a class="ghost" href="${trailer}" target="_blank" rel="noopener">▶ Find Trailer</a><a class="ghost" href="https://www.google.com/search?q=${encodeURIComponent(m.t+' official streaming')}" target="_blank" rel="noopener">Where to watch</a></div>${inlineVideo}</div></div>`;document.getElementById('modal').classList.add('show')}function closeModal(){document.getElementById('modal').classList.remove('show')}document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
-document.getElementById('movieCount').textContent=movies.length;document.getElementById('genreCount').textContent=genres.length-1;renderTrending();render();
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:600px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .poster{height:220px}
+  .detail{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+  <div class="logo">Show<b>Time</b></div>
+  <input id="search" class="search" placeholder="⌕ Search movies...">
+</nav>
+</header>
+
+<main>
+
+<section class="hero">
+  <h1>Find your next<br><span>great watch.</span></h1>
+  <p>
+    Explore movies, search by title and browse different genres.
+  </p>
+</section>
+
+<section class="section">
+  <div class="sectionHead">
+    <h2>Genres</h2>
+    <span id="count"></span>
+  </div>
+  <div id="chips" class="chips"></div>
+</section>
+
+<section class="section">
+  <h2>Movies</h2>
+  <div id="grid" class="grid"></div>
+</section>
+
+</main>
+
+<div id="modal" class="modal">
+  <div class="dialog">
+    <button class="close" onclick="closeModal()">×</button>
+    <div id="detail"></div>
+  </div>
+</div>
+
+<script>
+
+const movies = [
+
+{
+  title:"The Vvaan",
+  year:2026,
+  rating:8.5,
+  genre:"Action",
+  director:"Deepak Kumar Mishra, Arunabh Kumar",
+  description:"A man faces an extraordinary threat connected to an ancient forbidden forest.",
+  poster:"https://i.ibb.co/H6QNCVh/et00444235-tdfpdyspsb-landscape.jpg"
+},
+
+{
+  title:"Interstellar",
+  year:2014,
+  rating:8.7,
+  genre:"Sci-Fi",
+  director:"Christopher Nolan",
+  description:"A team travels beyond Earth in search of a future for humanity.",
+  poster:""
+},
+
+{
+  title:"The Dark Knight",
+  year:2008,
+  rating:9.0,
+  genre:"Action",
+  director:"Christopher Nolan",
+  description:"Batman faces a dangerous criminal mastermind in Gotham.",
+  poster:""
+},
+
+{
+  title:"The Martian",
+  year:2015,
+  rating:8.0,
+  genre:"Adventure",
+  director:"Ridley Scott",
+  description:"An astronaut must survive on Mars while his team works to bring him home.",
+  poster:""
+},
+
+{
+  title:"Spider-Man",
+  year:2002,
+  rating:7.4,
+  genre:"Action",
+  director:"Sam Raimi",
+  description:"A young hero discovers his powers and faces a dangerous enemy.",
+  poster:""
+},
+
+{
+  title:"The Prestige",
+  year:2006,
+  rating:8.5,
+  genre:"Drama",
+  director:"Christopher Nolan",
+  description:"Two rival illusionists become consumed by competition.",
+  poster:""
+},
+
+{
+  title:"Avatar",
+  year:2009,
+  rating:7.8,
+  genre:"Fantasy",
+  director:"James Cameron",
+  description:"A marine becomes involved in the struggle surrounding an alien world.",
+  poster:""
+},
+
+{
+  title:"Toy Story",
+  year:1995,
+  rating:8.3,
+  genre:"Animation",
+  director:"John Lasseter",
+  description:"An animated adventure about toys, friendship and growing up.",
+  poster:""
+},
+
+{
+  title:"Parasite",
+  year:2019,
+  rating:8.5,
+  genre:"Thriller",
+  director:"Bong Joon Ho",
+  description:"Two families become unexpectedly connected.",
+  poster:""
+},
+
+{
+  title:"Whiplash",
+  year:2014,
+  rating:8.5,
+  genre:"Drama",
+  director:"Damien Chazelle",
+  description:"A young drummer enters an intense relationship with an instructor.",
+  poster:""
+}
+
+];
+
+let selectedGenre="All";
+
+const grid=document.getElementById("grid");
+const chips=document.getElementById("chips");
+const search=document.getElementById("search");
+const count=document.getElementById("count");
+
+const genres=[
+  "All",
+  ...new Set(movies.map(movie=>movie.genre))
+];
+
+genres.forEach(genre=>{
+
+  const button=document.createElement("button");
+
+  button.className="chip"+(genre==="All"?" active":"");
+  button.textContent=genre;
+
+  button.onclick=()=>{
+
+    selectedGenre=genre;
+
+    document
+      .querySelectorAll(".chip")
+      .forEach(b=>b.classList.remove("active"));
+
+    button.classList.add("active");
+
+    render();
+
+  };
+
+  chips.appendChild(button);
+
+});
+
+function render(){
+
+  const query=search.value.toLowerCase().trim();
+
+  const filtered=movies.filter(movie=>{
+
+    const genreMatch=
+      selectedGenre==="All" ||
+      movie.genre===selectedGenre;
+
+    const searchMatch=
+      (movie.title+" "+movie.genre+" "+movie.director)
+      .toLowerCase()
+      .includes(query);
+
+    return genreMatch && searchMatch;
+
+  });
+
+  count.textContent=filtered.length+" movies";
+
+  if(!filtered.length){
+
+    grid.innerHTML=
+      `<div class="empty">
+        No movies found.
+      </div>`;
+
+    return;
+  }
+
+  grid.innerHTML=filtered.map(movie=>{
+
+    const posterStyle=movie.poster
+      ? `background-image:url("${movie.poster}")`
+      : "";
+
+    return `
+      <article class="card"
+        onclick="openMovie(${movies.indexOf(movie)})">
+
+        <div class="poster"
+             style="${posterStyle}">
+
+          <span class="score">
+            ⭐ ${movie.rating}
+          </span>
+
+          <span class="posterLabel">
+            ${movie.genre}
+          </span>
+
+        </div>
+
+        <div class="info">
+
+          <div class="title">
+            ${movie.title}
+          </div>
+
+          <div class="meta">
+            ${movie.year} · ${movie.director}
+          </div>
+
+          <span class="tag">
+            ${movie.genre}
+          </span>
+
+        </div>
+
+      </article>
+    `;
+
+  }).join("");
+
+}
+
+function openMovie(index){
+
+  const movie=movies[index];
+
+  document.getElementById("detail").innerHTML=`
+
+    <div class="detail">
+
+      <div class="detailPoster"
+           style="background-image:url('${movie.poster}')">
+      </div>
+
+      <div>
+
+        <small>
+          ${movie.genre} • ${movie.year}
+        </small>
+
+        <h2>${movie.title}</h2>
+
+        <p class="muted">
+          ${movie.description}
+        </p>
+
+        <p>
+          <b>Director:</b> ${movie.director}
+        </p>
+
+        <p>
+          <b>Rating:</b> ⭐ ${movie.rating}/10
+        </p>
+
+      </div>
+
+    </div>
+
+  `;
+
+  document.getElementById("modal")
+    .classList.add("show");
+
+}
+
+function closeModal(){
+
+  document.getElementById("modal")
+    .classList.remove("show");
+
+}
+
+search.addEventListener("input",render);
+
+render();
+
 </script>
-</body></html>
+
+</body>
+</html>
