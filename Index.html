@@ -1,223 +1,146 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ShowTime — Movies</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShowTime</title>
 
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  background:#07080c;
-  color:#fff;
-  font-family:Arial,sans-serif
-}
-header{
-  position:sticky;
-  top:0;
-  z-index:10;
-  background:#0d0f15;
-  border-bottom:1px solid #292c36
-}
-nav{
-  max-width:1200px;
-  margin:auto;
-  padding:16px 20px;
-  display:flex;
-  align-items:center;
-  gap:20px
-}
-.logo{
-  font-size:26px;
-  font-weight:900
-}
-.logo b{color:#ff315d}
-.search{
-  margin-left:auto;
-  width:min(380px,55vw);
-  padding:11px 16px;
-  border-radius:25px;
-  border:1px solid #333744;
-  background:#171922;
-  color:white;
-  outline:none
-}
-main{
-  max-width:1200px;
-  margin:auto;
-  padding:25px 20px
-}
-.hero{
-  padding:55px 35px;
-  border-radius:25px;
-  background:linear-gradient(135deg,#17111f,#111722);
-  border:1px solid #292c38
-}
-.hero h1{
-  font-size:clamp(42px,7vw,75px);
-  margin:10px 0
-}
-.hero h1 span{color:#ff315d}
-.hero p{
-  color:#aaa;
-  max-width:650px;
-  line-height:1.7
-}
-.section{margin-top:45px}
-.sectionHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:center
-}
-.chips{
-  display:flex;
-  gap:9px;
-  overflow:auto;
-  margin-top:15px
-}
-.chip{
-  padding:9px 15px;
-  border-radius:20px;
-  border:1px solid #333744;
-  background:#151720;
-  color:#ddd;
-  cursor:pointer;
-  white-space:nowrap
-}
-.chip.active{
-  background:#ff315d;
-  border-color:#ff315d
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:16px;
-  margin-top:20px
-}
-.card{
-  background:#12141b;
-  border:1px solid #292c38;
-  border-radius:16px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:.2s
-}
-.card:hover{
-  transform:translateY(-5px);
-  border-color:#ff315d
-}
-.poster{
-  height:260px;
-  background:#242733;
-  background-size:cover;
-  background-position:center;
-  position:relative
-}
-.poster:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(transparent 45%,#000c)
-}
-.score{
-  position:absolute;
-  top:10px;
-  right:10px;
-  z-index:2;
-  background:#090a0dcc;
-  padding:6px 8px;
-  border-radius:8px
-}
-.posterLabel{
-  position:absolute;
-  bottom:12px;
-  left:12px;
-  z-index:2;
-  font-weight:bold
-}
-.info{padding:13px}
-.title{
-  font-weight:bold;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis
-}
-.meta{
-  color:#999;
-  font-size:12px;
-  margin-top:6px
-}
-.tag{
-  display:inline-block;
-  margin-top:9px;
-  padding:5px 8px;
-  background:#252833;
-  border-radius:7px;
-  font-size:11px
-}
-.empty{
-  grid-column:1/-1;
-  padding:50px;
-  text-align:center;
-  color:#888
-}
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:100;
-  background:#000c;
-  place-items:center;
-  padding:20px
-}
-.modal.show{display:grid}
-.dialog{
-  width:min(750px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:#14161e;
-  border:1px solid #333744;
-  border-radius:20px;
-  padding:25px;
-  position:relative
-}
-.close{
-  position:absolute;
-  right:15px;
-  top:15px;
-  border:0;
-  border-radius:50%;
-  width:35px;
-  height:35px;
-  background:#292c38;
-  color:white;
-  font-size:20px
-}
-.detail{
-  display:grid;
-  grid-template-columns:220px 1fr;
-  gap:22px
-}
-.detailPoster{
-  height:320px;
-  border-radius:14px;
-  background-size:cover;
-  background-position:center
-}
-.detail h2{font-size:32px}
-.muted{
-  color:#aaa;
-  line-height:1.7
+* {
+  box-sizing: border-box;
 }
 
-@media(max-width:900px){
-  .grid{grid-template-columns:repeat(3,1fr)}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: white;
 }
-@media(max-width:600px){
-  .grid{grid-template-columns:repeat(2,1fr)}
-  .poster{height:220px}
-  .detail{grid-template-columns:1fr}
+
+header {
+  padding: 18px;
+  background: #1b1b1b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.add-btn {
+  background: #e50914;
+  color: white;
+}
+
+.container {
+  padding: 20px;
+}
+
+#movieGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 18px;
+}
+
+.movie {
+  background: #1d1d1d;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.movie img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+
+.movie-info {
+  padding: 12px;
+}
+
+.movie-info h3 {
+  margin: 0 0 6px;
+}
+
+.movie-info p {
+  color: #bbb;
+  font-size: 14px;
+}
+
+.watch {
+  display: inline-block;
+  background: #e50914;
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-top: 5px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.8);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.form {
+  width: 100%;
+  max-width: 450px;
+  background: #222;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.form h2 {
+  margin-top: 0;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 7px 0;
+  border: 0;
+  border-radius: 6px;
+  background: #333;
+  color: white;
+}
+
+textarea {
+  height: 90px;
+  resize: vertical;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.save {
+  background: #e50914;
+  color: white;
+}
+
+.cancel {
+  background: #555;
+  color: white;
 }
 </style>
 </head>
@@ -225,316 +148,136 @@ main{
 <body>
 
 <header>
-<nav>
-  <div class="logo">Show<b>Time</b></div>
-  <input id="search" class="search" placeholder="⌕ Search movies...">
-</nav>
+  <div class="logo">🎬 ShowTime</div>
+  <button class="add-btn" onclick="openForm()">＋ Add Movie</button>
 </header>
 
-<main>
-
-<section class="hero">
-  <h1>Find your next<br><span>great watch.</span></h1>
-  <p>
-    Explore movies, search by title and browse different genres.
-  </p>
-</section>
-
-<section class="section">
-  <div class="sectionHead">
-    <h2>Genres</h2>
-    <span id="count"></span>
-  </div>
-  <div id="chips" class="chips"></div>
-</section>
-
-<section class="section">
+<div class="container">
   <h2>Movies</h2>
-  <div id="grid" class="grid"></div>
-</section>
+  <div id="movieGrid"></div>
+</div>
 
-</main>
+<!-- ADD MOVIE FORM -->
+<div class="modal" id="modal">
+  <div class="form">
 
-<div id="modal" class="modal">
-  <div class="dialog">
-    <button class="close" onclick="closeModal()">×</button>
-    <div id="detail"></div>
+    <h2>Add Movie</h2>
+
+    <input id="title" placeholder="Movie name">
+    <input id="poster" placeholder="Poster image URL">
+    <input id="year" placeholder="Year">
+    <input id="genre" placeholder="Genre">
+    <input id="rating" placeholder="Rating">
+    <textarea id="description" placeholder="Description"></textarea>
+    <input id="watch" placeholder="Official trailer/watch URL">
+
+    <div class="form-buttons">
+      <button class="save" onclick="addMovie()">Add Movie</button>
+      <button class="cancel" onclick="closeForm()">Cancel</button>
+    </div>
+
   </div>
 </div>
 
 <script>
 
-const movies = [
+let movies = JSON.parse(localStorage.getItem("showtimeMovies")) || [];
 
-{
-  title:"The Vvaan",
-  year:2026,
-  rating:8.5,
-  genre:"Action",
-  director:"Deepak Kumar Mishra, Arunabh Kumar",
-  description:"A man faces an extraordinary threat connected to an ancient forbidden forest.",
-  poster:"https://i.ibb.co/H6QNCVh/et00444235-tdfpdyspsb-landscape.jpg"
-},
-
-{
-  title:"Interstellar",
-  year:2014,
-  rating:8.7,
-  genre:"Sci-Fi",
-  director:"Christopher Nolan",
-  description:"A team travels beyond Earth in search of a future for humanity.",
-  poster:""
-},
-
-{
-  title:"The Dark Knight",
-  year:2008,
-  rating:9.0,
-  genre:"Action",
-  director:"Christopher Nolan",
-  description:"Batman faces a dangerous criminal mastermind in Gotham.",
-  poster:""
-},
-
-{
-  title:"The Martian",
-  year:2015,
-  rating:8.0,
-  genre:"Adventure",
-  director:"Ridley Scott",
-  description:"An astronaut must survive on Mars while his team works to bring him home.",
-  poster:""
-},
-
-{
-  title:"Spider-Man",
-  year:2002,
-  rating:7.4,
-  genre:"Action",
-  director:"Sam Raimi",
-  description:"A young hero discovers his powers and faces a dangerous enemy.",
-  poster:""
-},
-
-{
-  title:"The Prestige",
-  year:2006,
-  rating:8.5,
-  genre:"Drama",
-  director:"Christopher Nolan",
-  description:"Two rival illusionists become consumed by competition.",
-  poster:""
-},
-
-{
-  title:"Avatar",
-  year:2009,
-  rating:7.8,
-  genre:"Fantasy",
-  director:"James Cameron",
-  description:"A marine becomes involved in the struggle surrounding an alien world.",
-  poster:""
-},
-
-{
-  title:"Toy Story",
-  year:1995,
-  rating:8.3,
-  genre:"Animation",
-  director:"John Lasseter",
-  description:"An animated adventure about toys, friendship and growing up.",
-  poster:""
-},
-
-{
-  title:"Parasite",
-  year:2019,
-  rating:8.5,
-  genre:"Thriller",
-  director:"Bong Joon Ho",
-  description:"Two families become unexpectedly connected.",
-  poster:""
-},
-
-{
-  title:"Whiplash",
-  year:2014,
-  rating:8.5,
-  genre:"Drama",
-  director:"Damien Chazelle",
-  description:"A young drummer enters an intense relationship with an instructor.",
-  poster:""
+/* Open form */
+function openForm() {
+  document.getElementById("modal").style.display = "flex";
 }
 
-];
+/* Close form */
+function closeForm() {
+  document.getElementById("modal").style.display = "none";
+}
 
-let selectedGenre="All";
+/* Add movie */
+function addMovie() {
 
-const grid=document.getElementById("grid");
-const chips=document.getElementById("chips");
-const search=document.getElementById("search");
-const count=document.getElementById("count");
-
-const genres=[
-  "All",
-  ...new Set(movies.map(movie=>movie.genre))
-];
-
-genres.forEach(genre=>{
-
-  const button=document.createElement("button");
-
-  button.className="chip"+(genre==="All"?" active":"");
-  button.textContent=genre;
-
-  button.onclick=()=>{
-
-    selectedGenre=genre;
-
-    document
-      .querySelectorAll(".chip")
-      .forEach(b=>b.classList.remove("active"));
-
-    button.classList.add("active");
-
-    render();
-
+  const movie = {
+    title: document.getElementById("title").value,
+    poster: document.getElementById("poster").value,
+    year: document.getElementById("year").value,
+    genre: document.getElementById("genre").value,
+    rating: document.getElementById("rating").value,
+    description: document.getElementById("description").value,
+    watch: document.getElementById("watch").value
   };
 
-  chips.appendChild(button);
-
-});
-
-function render(){
-
-  const query=search.value.toLowerCase().trim();
-
-  const filtered=movies.filter(movie=>{
-
-    const genreMatch=
-      selectedGenre==="All" ||
-      movie.genre===selectedGenre;
-
-    const searchMatch=
-      (movie.title+" "+movie.genre+" "+movie.director)
-      .toLowerCase()
-      .includes(query);
-
-    return genreMatch && searchMatch;
-
-  });
-
-  count.textContent=filtered.length+" movies";
-
-  if(!filtered.length){
-
-    grid.innerHTML=
-      `<div class="empty">
-        No movies found.
-      </div>`;
-
+  if (!movie.title || !movie.poster) {
+    alert("Please enter at least the movie name and poster URL.");
     return;
   }
 
-  grid.innerHTML=filtered.map(movie=>{
+  movies.push(movie);
 
-    const posterStyle=movie.poster
-      ? `background-image:url("${movie.poster}")`
-      : "";
+  localStorage.setItem(
+    "showtimeMovies",
+    JSON.stringify(movies)
+  );
 
-    return `
-      <article class="card"
-        onclick="openMovie(${movies.indexOf(movie)})">
+  renderMovies();
 
-        <div class="poster"
-             style="${posterStyle}">
+  closeForm();
 
-          <span class="score">
-            ⭐ ${movie.rating}
-          </span>
+  document.querySelectorAll(".form input, .form textarea")
+    .forEach(element => element.value = "");
+}
 
-          <span class="posterLabel">
-            ${movie.genre}
-          </span>
+/* Display movies */
+function renderMovies() {
+
+  const grid = document.getElementById("movieGrid");
+
+  grid.innerHTML = "";
+
+  movies.forEach(movie => {
+
+    grid.innerHTML += `
+      <div class="movie">
+
+        <img src="${movie.poster}"
+             alt="${movie.title}"
+             onerror="this.src='https://via.placeholder.com/300x450?text=No+Poster'">
+
+        <div class="movie-info">
+
+          <h3>${movie.title}</h3>
+
+          <p>
+            ${movie.year || ""}
+            ${movie.genre ? " • " + movie.genre : ""}
+          </p>
+
+          <p>
+            ⭐ ${movie.rating || "N/A"}
+          </p>
+
+          <p>
+            ${movie.description || ""}
+          </p>
+
+          ${
+            movie.watch
+            ? `<a class="watch"
+                 href="${movie.watch}"
+                 target="_blank">
+                 ▶ Watch / Trailer
+               </a>`
+            : ""
+          }
 
         </div>
 
-        <div class="info">
-
-          <div class="title">
-            ${movie.title}
-          </div>
-
-          <div class="meta">
-            ${movie.year} · ${movie.director}
-          </div>
-
-          <span class="tag">
-            ${movie.genre}
-          </span>
-
-        </div>
-
-      </article>
+      </div>
     `;
-
-  }).join("");
-
+  });
 }
 
-function openMovie(index){
-
-  const movie=movies[index];
-
-  document.getElementById("detail").innerHTML=`
-
-    <div class="detail">
-
-      <div class="detailPoster"
-           style="background-image:url('${movie.poster}')">
-      </div>
-
-      <div>
-
-        <small>
-          ${movie.genre} • ${movie.year}
-        </small>
-
-        <h2>${movie.title}</h2>
-
-        <p class="muted">
-          ${movie.description}
-        </p>
-
-        <p>
-          <b>Director:</b> ${movie.director}
-        </p>
-
-        <p>
-          <b>Rating:</b> ⭐ ${movie.rating}/10
-        </p>
-
-      </div>
-
-    </div>
-
-  `;
-
-  document.getElementById("modal")
-    .classList.add("show");
-
-}
-
-function closeModal(){
-
-  document.getElementById("modal")
-    .classList.remove("show");
-
-}
-
-search.addEventListener("input",render);
-
-render();
+/* Load movies when page opens */
+renderMovies();
 
 </script>
 
