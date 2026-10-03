@@ -194,7 +194,7 @@ function closeForm() {
 }
 
 /* Add movie */
-function addMovie() {
+async function addMovie() {
 
   const movie = {
     title: document.getElementById("title").value,
@@ -211,14 +211,9 @@ function addMovie() {
     return;
   }
 
-  movies.push(movie);
+  await addDoc(window.moviesCollection, movie);
 
-  localStorage.setItem(
-    "showtimeMovies",
-    JSON.stringify(movies)
-  );
-
-  renderMovies();
+await loadMoviesFromFirebase();
 
   closeForm();
 
@@ -277,44 +272,55 @@ function renderMovies() {
 }
 
 /* Load movies when page opens */
-renderMovies();
+  async function loadMoviesFromFirebase() {
+  const snapshot = await getDocs(window.moviesCollection);
+
+  movies = [];
+
+  snapshot.forEach((doc) => {
+    movies.push({
+      id: doc.id,
+      ...doc.data()
+    });
+  });
+
+  renderMovies();
+  }
+
 
 </script>
 <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBl9y4BqYsJcCmr1ZG7y3eWhan_dinJpLA",
-    authDomain: "showtime-b6b06.firebaseapp.com",
-    projectId: "showtime-b6b06",
-    storageBucket: "showtime-b6b06.firebasestorage.app",
-    messagingSenderId: "335160668068",
-    appId: "1:335160668068:web:941697bbb7810eec7b9b31",
-    measurementId: "G-J86XJQPQ1B"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  import {
-  getFirestore,
-  collection,
-  getDocs
+import {
+getFirestore,
+collection,
+getDocs,
+addDoc
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
+const firebaseConfig = {
+apiKey: "AIzaSyBl9y4BqYsJcCmr1ZG7y3eWhan_dinJpLA",
+
+authDomain: "showtime-b6b06.firebaseapp.com",
+projectId: "showtime-b6b06",
+storageBucket: "showtime-b6b06.firebasestorage.app",
+messagingSenderId: "335160668068",
+appId: "1:335160668068:web:941697bbb7810eec7b9b31"
+};
+
+const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const querySnapshot = await getDocs(collection(db, "movies"));
+window.db = db;
+window.moviesCollection = collection(db, "movies");
 
-querySnapshot.forEach((doc) => {
-  console.log(doc.id, doc.data());
-});
+window.getDocs = getDocs;
+window.addDoc = addDoc;
 </script>
+  <script>
+  loadMoviesFromFirebase();
+  </script>
+
 </body>
 </html>
