@@ -302,6 +302,19 @@ renderMovies();
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+  import {
+  getFirestore,
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+const db = getFirestore(app);
+
+const querySnapshot = await getDocs(collection(db, "movies"));
+
+querySnapshot.forEach((doc) => {
+  console.log(doc.id, doc.data());
+});
 </script>
 </body>
 </html>
